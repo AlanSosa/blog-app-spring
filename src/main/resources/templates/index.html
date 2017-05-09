@@ -1,14 +1,64 @@
 <!doctype html>
 <html xmlns:th="http//www.thymeleaf.org" lang="en">
 <head th:replace="layout::site-head">
-    <title>Welcome to Spring MVC Blog</title>
+    <title>Blog</title>
 </head>
 <body>
 
 <header th:replace="layout::site-header"/>
 
-<h1>Yeah this is the index!</h1>
-Now is <b th:text="${execInfo.now.time}"></b>
+<div class="container">
+
+    <div class="col-lg-8">
+        <!-- Blog Post -->
+        <div class="col-lg-12" th:each="p : ${latest3post}">
+            <!-- Title -->
+            <h1 th:text="${p.title}">Post Title</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                by <a href="#">Start Bootstrap</a>
+            </p>
+
+            <hr />
+
+            <!-- Date/Time -->
+            <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+
+            <hr />
+
+            <!-- Post Content -->
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+            <p th:utext>Post Content</p>
+
+            <hr />
+
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="well">
+            <h4>Blog Categories</h4>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-unstyled">
+                        <li><a href="#">Category Name</a>
+                        </li>
+                        <li><a href="#">Category Name</a>
+                        </li>
+                        <li><a href="#">Category Name</a>
+                        </li>
+                        <li><a href="#">Category Name</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+    </div>
+
+</div>
 
 <footer th:replace="layout::site-footer"/>
 </body>
