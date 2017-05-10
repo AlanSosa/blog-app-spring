@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="site-head">
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta th:include="this :: head" th:remove="tag" />
+    <link th:href="@{/wro4j/all.css}" rel="stylesheet"/>
     <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>

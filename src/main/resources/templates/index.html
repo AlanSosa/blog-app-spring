@@ -11,7 +11,7 @@
 
     <div class="row" th:each="item: ${list}">
         <h3>Titulo del post</h3>
-        <img src="../static/avatar.jpg" th:src="@{static/avatar.jpg}" width="60" height="60" class="img-circle" />
+        <img src="avatar.jpg"  width="60" height="60" class="img-circle" />
         <b th:text="${item}"></b>
         <div class=".col-md-6">
             <p>

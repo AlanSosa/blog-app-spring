@@ -1,0 +1,18 @@
+$font-stack:    Helvetica, sans-serif;
+$almost-white: #fafafa;
+$almost-black: #555;
+$content-width: 800px;
+
+body {
+  font: 100% $font-stack;
+  background-color: $almost-white;
+  color: $almost-black;
+  margin: 40px auto;
+  max-width: $content-width;
+  line-height:1.6;
+  padding:0 10px;
+}
+
+h1,h2,h3 {
+    line-height: 1.2;
+}
