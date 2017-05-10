@@ -9,11 +9,12 @@
 
 <div class="container">
 
-    <div class="row" th:each="item: ${list}">
-        <h3>Titulo del post</h3>
-        <img src="avatar.jpg"  width="60" height="60" class="img-circle" />
-        <b th:text="${item}"></b>
-        <div class=".col-md-6">
+    <div class="post" th:each="item: ${list}">
+        <div class="post-title">
+            <img src="avatar.png" alt="nombre del usuario"/>
+            <h1>Titulo del post</h1>
+            <h5>fecha del post</h5>
+        </div>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue erat eget accumsan placerat. Vestibulum rhoncus vehicula justo suscipit pellentesque. Sed magna urna, porta et ornare non, vehicula at dui. Vivamus dictum massa sagittis tellus tristique malesuada. Sed consectetur blandit malesuada. Morbi sem sapien, consequat vitae eleifend ac, eleifend et justo. Integer sed congue sapien. Nullam rutrum commodo sem, vel accumsan nisi consequat sit amet. Suspendisse non accumsan ante. Praesent vulputate, sem vitae placerat sagittis, augue mi egestas nisl, non tincidunt est massa a justo. Quisque interdum, nunc non tristique interdum, quam urna ultrices nibh, vitae interdum ex metus ultricies lacus. Donec sed rhoncus dui. Cras eget scelerisque lacus. In fringilla rhoncus gravida. Vestibulum in nisl tempor, maximus quam sed, facilisis tortor.
             </p>
@@ -23,7 +24,6 @@
             <p>
                 Fusce porta egestas diam, vel interdum orci blandit id. Nullam tempus nec ipsum sit amet ornare. Quisque dictum, nisl et sollicitudin fringilla, nulla enim commodo turpis, sed interdum risus ante nec risus. Mauris semper neque et urna mattis, id pharetra erat tincidunt. Donec accumsan velit mi, in pharetra tortor imperdiet quis. Donec condimentum, urna id dictum dignissim, ligula purus lobortis lectus, ullamcorper commodo sapien nisi sit amet magna. Quisque placerat velit urna, in convallis est imperdiet ut. Nulla sagittis est a faucibus eleifend. Integer ut blandit tellus. Curabitur velit lorem, dignissim et porta ac, rhoncus elementum ipsum. Aliquam magna quam, hendrerit nec metus et, iaculis placerat metus.
             </p>
-        </div>
     </div>
 
 </div>
