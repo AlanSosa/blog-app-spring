@@ -18,7 +18,7 @@
             <!-- Author -->
             <p class="lead">
                 by
-                <a href="#" th:if="${p.author}" th:text="${p.author.fullName != null ? p.author.fullName : p.author.username}">
+                <a href="#" th:if="${p.author}" th:remove="tag" th:text="${p.author.fullName != null ? p.author.fullName : p.author.username}">
                 Start Bootstrap
                 </a>
             </p>
