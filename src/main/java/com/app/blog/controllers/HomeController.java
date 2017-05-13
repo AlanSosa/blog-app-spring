@@ -2,6 +2,7 @@ package com.app.blog.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 public class HomeController {
 
-    @RequestMapping(name = "/", method = GET)
+    @GetMapping("/")
     public String index(Model model){
         ArrayList<String> list = new ArrayList<>();
         list.add("1");

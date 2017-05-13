@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="site-head">
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta th:include="this :: head" th:remove="tag" />
+    <link th:href="@{/wro4j/all.css}" rel="stylesheet"/>
     <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
 <header th:fragment="site-header">
-    <div class="navbar-default navbar">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li><a href="index.html" th:href="@{/}"><img src="../public/img/site-logo.png" th:src="@{/img/site-logo.png}"/></a></li>
+
+    <div class="nav-bar">
+            <ul>
+                <li><a href="index.html" th:href="@{/}"><img th:src="@{site-logo.png}" width="45" height="35"/></a></li>
                 <li><a href="index.html" th:href="@{/}">Home</a></li>
                 <li><a href="users/login.html" th:href="@{/users/login}">Login</a></li>
                 <li><a href="users/register.html" th:href="@{/users/register}">Register</a></li>
                 <li><a href="posts/index.html" th:href="@{/posts}">Posts</a></li>
                 <li><a href="posts/create.html" th:href="@{/posts/create}">Create Post</a></li>
                 <li><a href="users/index.html" th:href="@{/users}">Users</a></li>
+                <li class="right">
+                    <form method="post" th:action="@{/users/logout}">
+                        <input type="text" value="usuario" />
+                        <input type="text" value="contraseña" />
+                        <input type="submit" value="Sign in" />
+                    </form>
+                </li>
             </ul>
-
-            <form class="navbar-form navbar-right" method="post" th:action="@{/users/logout}">
-                <span>Hello, <b>(user)</b></span>
-                <button class="btn btn-default" type="submit"> Sign in</button>
-            </form>
-
-        </div>
     </div>
-
 
 </header>
 <footer th:fragment="site-footer">
