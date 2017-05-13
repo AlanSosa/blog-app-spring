@@ -3,6 +3,7 @@
 <head th:fragment="site-head">
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <!--<link rel="stylesheet" href="../public/css/styles.css"/>-->
     <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
@@ -39,10 +40,8 @@
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
-
-
-
 </header>
+
 <div class="panel panel-default" th:fragment="site-footer">
     <div class="panel-footer">
         &copy; Spring MVC Blog System, 2016
