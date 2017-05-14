@@ -13,19 +13,10 @@
     <div class="nav-bar">
             <ul>
                 <li><a href="index.html" th:href="@{/}"><img th:src="@{site-logo.png}" width="45" height="35"/></a></li>
-                <li><a href="index.html" th:href="@{/}">Home</a></li>
-                <li><a href="users/login.html" th:href="@{/users/login}">Login</a></li>
-                <li><a href="users/register.html" th:href="@{/users/register}">Register</a></li>
                 <li><a href="posts/index.html" th:href="@{/posts}">Posts</a></li>
                 <li><a href="posts/create.html" th:href="@{/posts/create}">Create Post</a></li>
-                <li><a href="users/index.html" th:href="@{/users}">Users</a></li>
-                <li class="right">
-                    <form method="post" th:action="@{/users/logout}">
-                        <input type="text" value="usuario" />
-                        <input type="text" value="contraseña" />
-                        <input type="submit" value="Sign in" />
-                    </form>
-                </li>
+                <li><a href="users/login.html" th:href="@{/users/login}">Login</a></li>
+                <li><a href="users/register.html" th:href="@{/users/register}">Register</a></li>
             </ul>
     </div>
 
