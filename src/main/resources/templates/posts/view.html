@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http//www.thymeleaf.org" lang="en">
+<head th:replace="layout::site-head">
+    <title>Blog</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+<div class="container">
+    <!-- Blog Post -->
+    <div class="col-lg-12">
+
+        <!-- Title -->
+        <h1 th:text="${post.title}">Post Title</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by
+            <a href="#" th:if="${post.author}" th:remove="tag" th:text="${post.author.fullName != null ? post.author.fullName : post.author.username}">
+                Start Bootstrap
+            </a>
+        </p>
+
+        <hr />
+
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> Posted on <b th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">24, 2013 at 9:00 PM</b></p>
+
+        <hr />
+
+        <!-- Post Content -->
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati</p>
+        <p th:utext="${post.body}">Post Content</p>
+
+        <hr />
+
+    </div>
+</div>
+
+<footer th:replace="layout::site-footer"/>
+</body>
+</html>

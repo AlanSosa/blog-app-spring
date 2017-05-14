@@ -1,12 +1,8 @@
 package com.app.blog.services;
 
-import com.app.blog.models.User;
-import java.util.List;
-
+/**
+ * Created by bacon_lover on 12/05/17.
+ */
 public interface UserService {
-    List<User> findAll();
-    User findById(Long id);
-    User create(User user);
-    User edit(User user);
-    void deleteById(Long id);
+    boolean aunthenticate(String username, String password);
 }

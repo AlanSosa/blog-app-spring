@@ -1,29 +1,57 @@
 <!doctype html>
 <html xmlns:th="http//www.thymeleaf.org" lang="en">
 <head th:replace="layout::site-head">
-    <title>Welcome to Spring MVC Blog</title>
+    <title>Blog</title>
 </head>
 
 <body>
 <header th:replace="layout::site-header"/>
-
 <div class="container">
 
-    <div class="post" th:each="item: ${list}">
-        <div class="post-title">
-            <img src="avatar.png" alt="nombre del usuario"/>
-            <h1>Titulo del post</h1>
-            <h5>fecha del post</h5>
+    <div class="col-lg-8">
+        <!-- Blog Post -->
+        <div class="col-lg-12" th:each="p : ${latest3posts}">
+
+            <!-- Title -->
+            <h1 th:text="${p.title}">Post Title</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a href="#" th:if="${p.author}" th:remove="tag" th:text="${p.author.fullName != null ? p.author.fullName : p.author.username}">
+                Start Bootstrap
+                </a>
+            </p>
+
+            <hr />
+
+            <!-- Date/Time -->
+            <p><span class="glyphicon glyphicon-time"></span> Posted on <b th:text="${#dates.format(p.date, 'dd-MMM-yyyy')}">24, 2013 at 9:00 PM</b></p>
+
+            <hr />
+
+            <!-- Post Content -->
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati</p>
+            <p th:utext="${p.body}">Post Content</p>
+
+            <hr />
+
         </div>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue erat eget accumsan placerat. Vestibulum rhoncus vehicula justo suscipit pellentesque. Sed magna urna, porta et ornare non, vehicula at dui. Vivamus dictum massa sagittis tellus tristique malesuada. Sed consectetur blandit malesuada. Morbi sem sapien, consequat vitae eleifend ac, eleifend et justo. Integer sed congue sapien. Nullam rutrum commodo sem, vel accumsan nisi consequat sit amet. Suspendisse non accumsan ante. Praesent vulputate, sem vitae placerat sagittis, augue mi egestas nisl, non tincidunt est massa a justo. Quisque interdum, nunc non tristique interdum, quam urna ultrices nibh, vitae interdum ex metus ultricies lacus. Donec sed rhoncus dui. Cras eget scelerisque lacus. In fringilla rhoncus gravida. Vestibulum in nisl tempor, maximus quam sed, facilisis tortor.
-            </p>
-            <p>
-                Maecenas quis tincidunt augue, nec hendrerit lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent lectus ligula, suscipit eu nibh et, viverra eleifend quam. Maecenas egestas, arcu quis varius commodo, erat lorem elementum ipsum, eu hendrerit nisi nisl quis purus. In nec pretium erat, ac euismod lorem. Aliquam porttitor vestibulum semper. Maecenas sit amet lorem in lacus feugiat rhoncus eget at velit. Curabitur molestie, sapien vel laoreet ullamcorper, dolor nunc consequat nunc, at ultricies nisl libero nec nisi. Fusce lobortis aliquam sapien, nec placerat nibh varius ac. In luctus risus non ante dictum ullamcorper. Integer dolor leo, tincidunt sit amet dignissim id, molestie a velit. Nulla accumsan luctus iaculis. Praesent leo eros, sodales a odio sit amet, pulvinar bibendum ex. Phasellus iaculis dictum odio, sed vulputate eros. Pellentesque risus diam, auctor a dui sit amet, venenatis gravida risus.
-            </p>
-            <p>
-                Fusce porta egestas diam, vel interdum orci blandit id. Nullam tempus nec ipsum sit amet ornare. Quisque dictum, nisl et sollicitudin fringilla, nulla enim commodo turpis, sed interdum risus ante nec risus. Mauris semper neque et urna mattis, id pharetra erat tincidunt. Donec accumsan velit mi, in pharetra tortor imperdiet quis. Donec condimentum, urna id dictum dignissim, ligula purus lobortis lectus, ullamcorper commodo sapien nisi sit amet magna. Quisque placerat velit urna, in convallis est imperdiet ut. Nulla sagittis est a faucibus eleifend. Integer ut blandit tellus. Curabitur velit lorem, dignissim et porta ac, rhoncus elementum ipsum. Aliquam magna quam, hendrerit nec metus et, iaculis placerat metus.
-            </p>
+    </div>
+
+    <div class="col-md-4">
+        <div class="well">
+            <h4>Recent Posts</h4>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-unstyled" th:each="p : ${latest5posts}">
+                        <li><a href="@{/posts/view/{id}/(id=${p.id})}" th:text="${p.title}">Post Name</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
     </div>
 
 </div>

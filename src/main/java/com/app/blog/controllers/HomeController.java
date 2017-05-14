@@ -1,13 +1,16 @@
 package com.app.blog.controllers;
 
+import com.app.blog.models.Post;
+import com.app.blog.services.PostService;
+import com.app.blog.services.PostServiceStubImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by bacon_lover on 07/05/17.
@@ -15,17 +18,20 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private PostService postService;
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String index(Model model){
-        ArrayList<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        model.addAttribute("list", list);
+        //postService = new PostServiceStubImpl();
+
+        List<Post> latest5Posts = postService.findLatest5();
+        model.addAttribute("latest5posts", latest5Posts);
+
+        List<Post> latest3Posts = latest5Posts.stream()
+                .limit(3)
+                .collect(Collectors.toList());
+        model.addAttribute("latest3posts", latest3Posts);
         return "index";
     }
 
