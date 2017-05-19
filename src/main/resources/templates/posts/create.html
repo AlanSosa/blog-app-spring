@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http//www.thymeleaf.org" lang="en">
+<head th:replace="layout::site-head">
+    <title>Blog</title>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+<div class="container">
+
+    <form action="#" th:action="@{/posts/create}" th:object="${mPost}" method="post">
+
+        <input placeholder="titulo" type="text" th:field="*{title}" />
+        <input placeholder="contenido" type="text" th:field="*{body}" />
+        <input type="hidden" th:field="*{id}" />
+        <input type="submit" value="Submit" />
+        <input type="reset" value="Reset" />
+    </form>
+
+</div>
+
+<footer th:replace="layout::site-footer"/>
+</body>
+</html>

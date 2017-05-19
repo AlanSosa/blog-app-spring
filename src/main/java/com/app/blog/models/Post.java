@@ -1,21 +1,41 @@
 package com.app.blog.models;
 
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by bacon_lover on 08/05/17.
  */
+@Entity
+@Table(name = "post")
 public class Post {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String body;
-    private User author;
     private Date date = new Date();
+    @OneToOne
+    private User author;
+
+    public Post() {}
+
+    public Post(Long id, String title, String body, User author) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+    }
 
     public Long getId() {
-
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Post [id=%d, title='%s', author='%s']", id, title, author.getUsername());
     }
 
     public void setId(Long id) {
@@ -54,14 +74,4 @@ public class Post {
         this.date = date;
     }
 
-    public Post(Long id, String title, String body, User author) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.author = author;
-    }
-
-    public Post() {
-
-    }
 }

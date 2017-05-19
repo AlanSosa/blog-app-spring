@@ -1,17 +1,22 @@
 package com.app.blog.models;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by bacon_lover on 08/05/17.
  */
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String passwordHash;
     private String fullName;
-    private Set<Post> posts= new HashSet<>();
+    //private Set<Post> posts= new HashSet<>();
 
     public Long getId() {
         return id;
@@ -45,13 +50,13 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Set<Post> getPosts() {
+    /*public Set<Post> getPosts() {
         return posts;
     }
 
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
-    }
+    }*/
 
     public User() {
     }
@@ -69,7 +74,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
                 ", fullName='" + fullName + '\'' +
-                ", posts=" + posts +
+                ", posts= + posts" +
                 '}';
     }
 }

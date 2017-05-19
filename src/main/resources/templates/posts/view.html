@@ -11,7 +11,7 @@
     <div class="col-lg-12">
 
         <!-- Title -->
-        <h1 th:text="${post.title}">Post Title</h1>
+        <h1 th:text="${post.title}"></h1>
 
         <!-- Author -->
         <p class="lead">
@@ -33,7 +33,8 @@
         <p th:utext="${post.body}">Post Content</p>
 
         <hr />
-
+        <a href="#" th:href="|/posts/edit/${post.id}|">Editar</a>
+        <a href="#" th:href="|/posts/delete/${post.id}|">Eliminar</a>
     </div>
 </div>
 
