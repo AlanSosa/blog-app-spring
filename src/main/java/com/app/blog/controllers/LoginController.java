@@ -1,13 +1,12 @@
 package com.app.blog.controllers;
 
 import com.app.blog.forms.LoginForm;
-import com.app.blog.services.UserService;
+import com.app.blog.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -17,30 +16,31 @@ import javax.validation.Valid;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    //@Autowired
+    //private UserService userService;
 
     //@Autowired
     //private NotificationService notifyService;
 
-    @RequestMapping("/users/login")
+    @GetMapping("/users/login")
     public String login(LoginForm loginForm){
         return "users/login";
     }
 
-    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
+    @PostMapping("/users/login")
     public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()){
+        System.out.println("Login Data : "+ loginForm.getUsername() + ", "+ loginForm.getPassword());
+        /*if(bindingResult.hasErrors()){
             //notifyService.addErrorMessage("Please Fill the form correctly");
             model.addAttribute("error", "Please Fill the form Correctly");
             return "users/login";
-        }
+        }*
 
-        if( !userService.aunthenticate(loginForm.getUsername(), loginForm.getPassword())){
+        /*if( !userService.aunthenticate(loginForm.getUsername(), loginForm.getPassword())){
             //notifyService.addErrorMessage("Invalid Login!");
             model.addAttribute("error", "Invalid Login");
             return "users/login";
-        }
+        }*/
 
         //notifyService.addInfoMessage("Login Successful");
         System.out.println("Login Successful!");

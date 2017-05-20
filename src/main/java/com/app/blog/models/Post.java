@@ -12,13 +12,20 @@ import java.util.Date;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 300)
     private String title;
+
+    @Lob @Column(nullable = false)
     private String body;
-    private Date date = new Date();
-    @OneToOne
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
+
+    @Column(nullable = false)
+    private Date date = new Date();
 
     public Post() {}
 
