@@ -30,11 +30,11 @@ public class LoginController {
     @PostMapping("/users/login")
     public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult, Model model){
         System.out.println("Login Data : "+ loginForm.getUsername() + ", "+ loginForm.getPassword());
-        /*if(bindingResult.hasErrors()){
-            //notifyService.addErrorMessage("Please Fill the form correctly");
+
+        if(bindingResult.hasErrors()){
             model.addAttribute("error", "Please Fill the form Correctly");
             return "users/login";
-        }*
+        }
 
         /*if( !userService.aunthenticate(loginForm.getUsername(), loginForm.getPassword())){
             //notifyService.addErrorMessage("Invalid Login!");

@@ -24,7 +24,9 @@ public class PostsController {
 
     @GetMapping("/posts/create")
     public String create(Model model) {
-        model.addAttribute("mPost", new Post());
+        Post mPost = new Post();
+        System.out.println("New Post ID: "+mPost.getId());
+        model.addAttribute("mPost", mPost);
         return "posts/create";
     }
 

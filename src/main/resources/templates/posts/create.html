@@ -9,6 +9,7 @@
 <div class="container">
 
     <form action="#" th:action="@{/posts/create}" th:object="${mPost}" method="post">
+        <p> Id del post : </p><p th:utext="${mPost.id}"></p>
         <input placeholder="titulo" type="text" th:field="*{title}" />
         <input placeholder="contenido" type="text" th:field="*{body}" />
         <input type="hidden" th:field="*{id}" />
