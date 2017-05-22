@@ -6,7 +6,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.web.servlet.ErrorPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//zimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 /**
  * Created by bacon_lover on 07/05/17.

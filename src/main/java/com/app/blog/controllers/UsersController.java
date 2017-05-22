@@ -25,6 +25,9 @@ public class UsersController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @GetMapping("/users/register")
     public String index(RegisterUserForm registerUserForm) {
         return "users/register";
@@ -39,12 +42,10 @@ public class UsersController {
         {
             try{
                 User user = new User();
-                //BCryptPasswordEncoder passEnconder = new BCryptPasswordEncoder();
-
+                BCryptPasswordEncoder passEnconder = new BCryptPasswordEncoder();
                 user.setUsername( registerForm.getUsername());
                 user.setFullName( registerForm.getFullname());
-                //user.setPasswordHash( passEnconder.encode( registerForm.getPassword() ));
-                user.setPasswordHash( registerForm.getPassword() );
+                user.setPasswordHash(  bCryptPasswordEncoder.encode( registerForm.getPassword() ) );
                 userRepository.save(user);
                 model.addAttribute("error", "User Created Succesfully!");
             }
