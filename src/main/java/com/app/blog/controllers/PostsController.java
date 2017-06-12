@@ -1,11 +1,14 @@
 package com.app.blog.controllers;
 
 import com.app.blog.models.Post;
+import com.app.blog.models.User;
 import com.app.blog.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * Created by bacon_lover on 09/05/17.
@@ -25,7 +28,7 @@ public class PostsController {
     @GetMapping("/posts/create")
     public String create(Model model) {
         Post mPost = new Post();
-        System.out.println("New Post ID: "+mPost.getId());
+        //System.out.println("New Post ID: "+mPost.getId() + "User_id" + mPost.getAuthor().getId());
         model.addAttribute("mPost", mPost);
         return "posts/create";
     }
@@ -35,6 +38,14 @@ public class PostsController {
         if (mPost.getId() == null){
             System.out.println("ID es null");
         }
+        User loggedUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        mPost.setAuthor( loggedUser);
+
+        /*System.out.println("ID : " + mPost.getId());
+        System.out.println("Title : " + mPost.getTitle());
+        System.out.println("Body : "+ mPost.getBody());
+        System.out.println("Date : "+ mPost.getDate());*/
+
         postRepository.save(mPost);
         return "redirect:/";
     }

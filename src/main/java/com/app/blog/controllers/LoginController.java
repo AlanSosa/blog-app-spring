@@ -28,7 +28,8 @@ public class LoginController {
     }
 
     @PostMapping("/users/login")
-    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult, Model model){
+    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult, Model model,
+                            @RequestParam(value = "error", required = false) String error){
         System.out.println("Login Data : "+ loginForm.getUsername() + ", "+ loginForm.getPassword());
 
         if(bindingResult.hasErrors()){
@@ -36,13 +37,10 @@ public class LoginController {
             return "users/login";
         }
 
-        /*if( !userService.aunthenticate(loginForm.getUsername(), loginForm.getPassword())){
-            //notifyService.addErrorMessage("Invalid Login!");
-            model.addAttribute("error", "Invalid Login");
-            return "users/login";
-        }*/
+        if(error != null){
+            model.addAttribute("error", "Invalid Username and Password");
+        }
 
-        //notifyService.addInfoMessage("Login Successful");
         System.out.println("Login Successful!");
         return "redirect:/";
     }

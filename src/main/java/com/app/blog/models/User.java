@@ -1,6 +1,7 @@
 package com.app.blog.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,10 +19,18 @@ public class User {
     private String username;
 
     @Column(length = 60)
-    private String passwordHash;
+    private String password;
 
     @Column(length = 100)
     private String fullName;
+
+    @Column(nullable = false)
+    @Max(value = 1)
+    private int enabled;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
@@ -42,12 +51,12 @@ public class User {
         this.username = username;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFullName() {
@@ -58,13 +67,17 @@ public class User {
         this.fullName = fullName;
     }
 
-    /*public Set<Post> getPosts() {
-        return posts;
-    }
+    public int getEnabled() { return enabled; }
 
-    public void setPosts(Set<Post> posts) {
-        this.posts = posts;
-    }*/
+    public void setEnabled(int enabled) { this.enabled = enabled; }
+
+    public Set<Post> getPosts() { return posts; }
+
+    public void setPosts(Set<Post> posts) { this.posts = posts; }
+
+    public Role getRole() { return role; }
+
+    public void setRole(Role role) { this.role = role; }
 
     public User() {
     }
@@ -73,6 +86,15 @@ public class User {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
+        this.enabled = 1;
+    }
+
+    public User(String username, String password, String fullName, Role role) {
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.enabled = 1;
+        this.role = role;
     }
 
     @Override
@@ -80,7 +102,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", passwordHash='" + passwordHash + '\'' +
+                ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", posts= + posts" +
                 '}';

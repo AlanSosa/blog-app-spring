@@ -1,7 +1,9 @@
 package com.app.blog.controllers;
 
 import com.app.blog.forms.RegisterUserForm;
+import com.app.blog.models.Role;
 import com.app.blog.models.User;
+import com.app.blog.repositories.RoleRepository;
 import com.app.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaSystemException;
@@ -13,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
+import javax.persistence.EntityExistsException;
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by bacon_lover on 20/05/17.
@@ -23,7 +28,10 @@ import javax.validation.Valid;
 public class UsersController {
 
     @Autowired
-    private UserRepository userRepository;
+    private RoleRepository roleRepo;
+
+    @Autowired
+    private UserRepository userRepo;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -40,18 +48,28 @@ public class UsersController {
             model.addAttribute("error", "Please Fill the form Correctly");
         else
         {
+            String username = registerForm.getUsername();
+            String fullname = registerForm.getFullname();
+            String passwordHash = bCryptPasswordEncoder.encode( registerForm.getPassword() );
+            //String passwordHash = registerForm.getPassword();
             try{
-                User user = new User();
-                BCryptPasswordEncoder passEnconder = new BCryptPasswordEncoder();
-                user.setUsername( registerForm.getUsername());
-                user.setFullName( registerForm.getFullname());
-                user.setPasswordHash(  bCryptPasswordEncoder.encode( registerForm.getPassword() ) );
-                userRepository.save(user);
+
+                //Role role = new Role("ROLE_USER");
+                Role role = roleRepo.findOne((long) 1);
+                User user = new User(username, passwordHash, fullname, role);
+                /*Set users = new HashSet<User>(){{
+                    add(user);
+                }};
+                role.setUsers(users);
+                roleRepo.save(role);*/
+                userRepo.save(user);
                 model.addAttribute("error", "User Created Succesfully!");
             }
-            catch(JpaSystemException exception){
-                System.out.println(exception.getMessage());
-                model.addAttribute("error", "Oops! something went wrong");
+            catch(EntityExistsException e){
+                Role role = roleRepo.findOne((long) 1);
+                User user = new User(username, passwordHash, fullname, role);
+                userRepo.save(user);
+                model.addAttribute("error", e.getMessage());
             }
         }
         return "users/register";
