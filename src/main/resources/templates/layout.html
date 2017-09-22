@@ -4,25 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta th:include="this :: head" th:remove="tag" />
-    <link th:href="@{/wro4j/all.css}" rel="stylesheet" />
+    <link th:href="@{/css/spectre.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/spectre-exp.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/spectre-icons.min.css}" rel="stylesheet" />
     <meta th:include="this :: head" th:remove="tag"/>
 </head>
 <body>
-<header th:fragment="site-header">
-
-    <div class="nav-bar">
-            <ul>
-                <li><a href="#" th:href="@{/}"><img th:src="@{site-logo.png}" width="45" height="35"/></a></li>
-                <li><a href="#" th:href="@{/}">Posts</a></li>
-                <li><a href="#" th:href="@{/posts/create}">Create Post</a></li>
-                <li><a href="#" th:href="@{/users/login}">Login</a></li>
-                <li><a href="#" th:href="@{/users/register}">Register</a></li>
-            </ul>
-    </div>
-
+<header class="navbar" th:fragment="site-header">
+    <section class="navbar-section">
+        <a href="#" class="navbar-brand mr-2" th:href="@{/}"><img th:src="@{site-logo.png}" width="45" height="35"/></a>
+        <a href="#" th:href="@{/}">Posts</a>
+        <a href="#" th:href="@{/posts/create}">Create Post</a>
+        <a href="#" th:href="@{/users/login}">Login</a>
+        <a href="#" th:href="@{/users/register}">Register</a>
+    </section>
 </header>
 <footer th:fragment="site-footer">
-    &copy; Spring MVC Blog System, 2016
+    &copy; Spring MVC Blog Systasklsaklsaklem, 2016
 </footer>
 </body>
 </html>

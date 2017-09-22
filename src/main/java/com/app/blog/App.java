@@ -21,7 +21,7 @@ public class App
 {
 
     @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer(){
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
         return(container -> {
             ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404");
 
