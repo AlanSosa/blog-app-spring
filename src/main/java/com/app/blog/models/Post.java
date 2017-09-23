@@ -29,7 +29,7 @@ public class Post {
 
     public Post() {}
 
-    public Post(Long id, String title, String body, User author) {
+    public Post(long id, String title, String body, User author) {
         this.id = id;
         this.title = title;
         this.body = body;

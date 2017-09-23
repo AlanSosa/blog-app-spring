@@ -24,7 +24,6 @@ public class App
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return(container -> {
             ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404");
-
             container.addErrorPages(error404Page);
         });
     }
@@ -43,17 +42,6 @@ public class App
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("root");
         return driverManagerDataSource;
-    }
-
-    @Bean(name = "userDetailsService")
-    public UserDetailsService userDetailsService(){
-        JdbcDaoImpl jdbcImpl = new JdbcDaoImpl();
-        jdbcImpl.setDataSource(dataSource());
-        jdbcImpl.setUsersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?");
-        jdbcImpl.setAuthoritiesByUsernameQuery("SELECT users.username, role.name FROM users\n" +
-                "JOIN role ON users.role_id = role.id\n" +
-                "WHERE users.username = ?");
-        return jdbcImpl;
     }
 
     @Bean(name= "bCryptPasswordEnconder")

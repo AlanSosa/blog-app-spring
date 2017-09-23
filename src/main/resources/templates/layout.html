@@ -1,26 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head th:fragment="site-head">
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta th:include="this :: head" th:remove="tag" />
-    <link th:href="@{/css/spectre.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/spectre-exp.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/spectre-icons.min.css}" rel="stylesheet" />
     <meta th:include="this :: head" th:remove="tag"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css" />
 </head>
 <body>
-<header class="navbar" th:fragment="site-header">
-    <section class="navbar-section">
-        <a href="#" class="navbar-brand mr-2" th:href="@{/}"><img th:src="@{site-logo.png}" width="45" height="35"/></a>
-        <a href="#" th:href="@{/}">Posts</a>
-        <a href="#" th:href="@{/posts/create}">Create Post</a>
-        <a href="#" th:href="@{/users/login}">Login</a>
-        <a href="#" th:href="@{/users/register}">Register</a>
-    </section>
-</header>
-<footer th:fragment="site-footer">
-    &copy; Spring MVC Blog Systasklsaklsaklem, 2016
+
+<nav class="navbar is-dark" th:fragment="site-header">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="#" th:href="@{/}">
+            <img th:src="@{/images/site-logo.png}" width="45" height="65" />
+        </a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="#" th:href="@{/}">Posts</a>
+            <a class="navbar-item" href="#" th:href="@{/posts/create}" sec:authorize="isAuthenticated()">Create Post</a>
+        </div>
+        <div class="navbar-end" sec:authorize="!isAuthenticated()">
+            <a class="navbar-item" href="#" th:href="@{/user/login}">Login</a>
+            <a class="navbar-item" href="#" th:href="@{/user/register}">Register</a>
+        </div>
+        <div class="navbar-end" sec:authorize="isAuthenticated()">
+            <a class="navbar-item" sec:authorize="isAuthenticated()" sec:authentication="name"></a>
+            <p class="navbar-item" sec:authentication="authorities">[ROLE_USER, ROLE_ADMIN]></p>
+            <div class="navbar-item" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                This will only be displayed if authenticated user has role ROLE_ADMIN.
+            </div>
+            <form class="navbar-item" th:action="@{/logout}" method="post">
+                <input class="button is-primary" type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+<footer th:fragment="site-footer" class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <p>&copy; Spring MVC Blog System, 2017</p>
+        </div>
+    </div>
 </footer>
 </body>
 </html>

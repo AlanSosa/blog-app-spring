@@ -13,7 +13,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 30, unique = true)
     private String username;
@@ -35,11 +35,11 @@ public class User {
     @OneToMany(mappedBy = "author")
     private Set<Post> posts = new HashSet<Post>();
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -82,7 +82,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String fullName) {
+    public User(long id, String username, String fullName) {
         this.id = id;
         this.username = username;
         this.fullName = fullName;
@@ -99,12 +99,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", fullName='" + fullName + '\'' +
-                ", posts= + posts" +
+        return "User{ " +
+                "id = " + id +
+                ", username = '" + username + '\'' +
+                ", password = '" + password + '\'' +
+                ", fullName = '" + fullName + '\'' +
+                ", posts = + posts" +
                 '}';
     }
 }

@@ -6,7 +6,6 @@ import com.app.blog.models.User;
 import com.app.blog.repositories.RoleRepository;
 import com.app.blog.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
-import javax.persistence.EntityExistsException;
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
+import java.security.Principal;
 
 /**
  * Created by bacon_lover on 20/05/17.
@@ -27,68 +24,54 @@ import java.util.Set;
 @Controller
 public class UsersController {
 
-    @Autowired
-    private RoleRepository roleRepo;
+    @Autowired private RoleRepository roleRepository;
+    @Autowired private UserRepository userRepository;
+    @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private UserRepository userRepo;
+    @GetMapping("/user/login")
+    public String login(Principal principal) {
+        if (principal != null) return "redirect:/";
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @GetMapping("/users/register")
-    public String index(RegisterUserForm registerUserForm) {
-        return "users/register";
+        return "user/login";
     }
 
-    @PostMapping("/users/register")
-    public String save(@Valid RegisterUserForm registerForm, BindingResult bindingResult, Model model){
+    @GetMapping("/user/register")
+    public String index(RegisterUserForm form, Principal principal) {
+        if (principal != null) return "redirect:/";
 
-        if(bindingResult.hasErrors())
-            model.addAttribute("error", "Please Fill the form Correctly");
-        else
-        {
+        return "user/register";
+    }
+
+    @PostMapping("/user/register")
+    public String save(@Valid RegisterUserForm registerForm, BindingResult bindingResult, Model model) {
+        if(!bindingResult.hasErrors()) {
             String username = registerForm.getUsername();
             String fullname = registerForm.getFullname();
-            String passwordHash = bCryptPasswordEncoder.encode( registerForm.getPassword() );
-            //String passwordHash = registerForm.getPassword();
-            try{
+            String passwordHash = bCryptPasswordEncoder.encode(registerForm.getPassword() );
 
-                //Role role = new Role("ROLE_USER");
-                Role role = roleRepo.findOne((long) 1);
-                User user = new User(username, passwordHash, fullname, role);
-                /*Set users = new HashSet<User>(){{
-                    add(user);
-                }};
-                role.setUsers(users);
-                roleRepo.save(role);*/
-                userRepo.save(user);
-                model.addAttribute("error", "User Created Succesfully!");
-            }
-            catch(EntityExistsException e){
-                Role role = roleRepo.findOne((long) 1);
-                User user = new User(username, passwordHash, fullname, role);
-                userRepo.save(user);
-                model.addAttribute("error", e.getMessage());
-            }
+            Role role = roleRepository.findByName("ROLE_USER");
+            User user = new User(username, passwordHash, fullname, role);
+
+            userRepository.save(user);
         }
-        return "users/register";
+        return "redirect:/user/login";
     }
 
-    @GetMapping("/users/view/{id}")
+    /*
+    @GetMapping("/user/view/{id}")
     public String view(){
-        return "users/view";
+        return "user/view";
     }
 
-    @GetMapping("/users/delete/{id}")
+    @GetMapping("/user/delete/{id}")
     public String delete(){
         return "redirect:/";
     }
 
-    @GetMapping("/users/edit/{id}")
+    @GetMapping("/user/edit/{id}")
     public String edit(){
-        return "users/register";
+        return "user/register";
     }
-
+    */
 
 }

@@ -1,0 +1,74 @@
+<!doctype html>
+<html xmlns:th="http//www.thymeleaf.org" lang="en">
+<head th:replace="layout::site-head">
+    <title>Blog</title>
+    <link rel="stylesheet" href="..pùblic/css/signin.css"/>
+</head>
+<body>
+
+<header th:replace="layout::site-header"/>
+<div class="container">
+    <br/>
+    <br/>
+    <div class="columns is-mobile is-centered">
+        <form method="post" th:object="${registerUserForm}">
+
+            <div class="field">
+                <h1 class="title">Register User</h1>
+            </div>
+            <br/>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="fullname" th:value="*{fullname}">Full Name:</label>
+                </div>
+                <div class="control" th:classappend="${#fields.hasErrors('fullname')} ? has-icons-right">
+                    <input class="input" id="fullname" type="text" name="fullname" th:value="*{fullname}"/>
+                    <span class="icon is-small is-right" th:if="${#fields.hasErrors('fullname')}">
+                        <i class="fa fa-warning"></i>
+                    </span>
+                    <p class="help is-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="username">User name:</label>
+                </div>
+                <div class="control" th:classappend="${#fields.hasErrors('username')} ? has-icons-right">
+                    <input class="input" id="username" type="text" name="username" th:value="*{username}"/>
+                    <span class="icon is-small is-right" th:if="${#fields.hasErrors('username')}">
+                        <i class="fa fa-warning"></i>
+                    </span>
+                    <p class="help is-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                </div>
+            </div>
+
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label" for="password" th:value="*{password}">Password:</label>
+                </div>
+                <div class="control" th:classappend="${#fields.hasErrors('password')} ? has-icons-right">
+                    <input class="input" id="password" type="password" name="password" th:value="*{password}"/>
+                    <span class="icon is-small is-right" th:if="${#fields.hasErrors('password')}">
+                        <i class="fa fa-warning"></i>
+                </span>
+                    <p class="help is-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                </div>
+            </div>
+
+            <!--<div><input type="submit" value="Login"/>-->
+            <!--<a href="register.html" th:href="@{/user/register}">[Go to Register]</a></div>-->
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Register</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    <br/>
+</div>
+
+<footer th:replace="layout::site-footer"/>
+</body>
+</html>
