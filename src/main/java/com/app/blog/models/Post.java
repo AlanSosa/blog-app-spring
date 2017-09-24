@@ -13,72 +13,61 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private final long id;
 
     @Column(nullable = false, length = 300)
-    private String title;
+    private final String title;
 
     @Lob @Column(nullable = false)
-    private String body;
+    private final String body;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private User author;
+    private final User author;
 
     @Column(nullable = false)
-    private Date date = new Date();
+    private final Date date;
 
-    public Post() {}
+    public Post() {
+        id = 0;
+        title = "";
+        body = "";
+        author = null;
+        date = new Date();
+    }
 
     public Post(long id, String title, String body, User author) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
+        date = new Date();
     }
 
     public Long getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Post [id=%d, title='%s', author='%s']", id, title, author.getUsername());
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+        String newBody = body.replace("\n", "<br/>");
+        // TODO : cada post empiesa con con dos <br/> el 12 es para quitarlos corregir eso.
+        return newBody.substring(12, newBody.length());
     }
 
     public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return String.format("Post [id=%d, title='%s', author='%s']", id, title, author.getUsername());
     }
-
 }
