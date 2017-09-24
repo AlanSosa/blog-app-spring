@@ -8,9 +8,9 @@
 <header th:replace="layout::site-header"/>
 
 <div class="container is-widescreen">
-    <br/>
-    <br/>
     <div th:each="post : ${lastpost}">
+        <br/>
+        <br/>
         <div class="columns">
             <div class="column">
                 <img class="image is-48x48" th:src="@{/images/avatar.png}"/>
@@ -24,18 +24,22 @@
             <div class="column is-11">
                 <!-- Title -->
                 <a href="#" th:href="|/posts/view/${post.id}|">
-                    <h1 class="title" th:text="${post.title}"></h1>
+                    <h1 class="title" th:text="${post.title}">TITLE</h1>
                 </a>
 
                 <!-- Date/Time -->
                 <p>Posted on <b th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">24, 2013 at 9:00 PM</b></p>
-                <hr/>
+
                 <!-- Post Content -->
-                <p th:utext="${post.body}">Post Content</p>
+                <p th:utext="${ #strings.substring(post.body, 0, 1000) +'...' +'&lt;a href=/posts/view/'+ post.id  +'&gt;[More]&lt;/a&gt;'}">Post Content</p>
             </div>
             <hr/>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 </div>
 <footer th:replace="layout::site-footer"/>
 

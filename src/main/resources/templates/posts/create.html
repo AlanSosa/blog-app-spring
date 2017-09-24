@@ -12,16 +12,7 @@
         <div class="column is-half is-narrow">
             <br/>
             <br/>
-            <form action="#" th:action="@{/posts/create}" th:object="${mPost}" method="post">
-
-                <div class="field is-horizontal">
-                    <div class="field-label is-normal">
-                        <label class="label">Id del post :</label>
-                    </div>
-                    <div class="field-body">
-                        <label class="label" th:utext="${mPost.id}"></label>
-                    </div>
-                </div>
+            <form action="#" th:action="@{/posts/create}" th:object="${newPostForm}" method="post">
 
                 <div class="field is-horizontal">
                     <div class="field-label is-medium">
@@ -31,6 +22,7 @@
                         <div class="field">
                             <div class="control">
                                 <input class="input is-medium" type="text" th:field="*{title}"/>
+                                <p class="help is-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">body Error</p>
                             </div>
                         </div>
                     </div>
@@ -44,6 +36,7 @@
                         <div class="field">
                             <div class="control">
                                 <textarea class="textarea" rows="10" th:field="*{body}"/>
+                                <p class="help is-danger" th:if="${#fields.hasErrors('body')}" th:errors="*{body}">body Error</p>
                             </div>
                         </div>
                     </div>

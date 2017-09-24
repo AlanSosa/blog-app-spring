@@ -38,7 +38,6 @@ public class UsersController {
     @GetMapping("/user/register")
     public String index(RegisterUserForm form, Principal principal) {
         if (principal != null) return "redirect:/";
-
         return "user/register";
     }
 
@@ -49,6 +48,7 @@ public class UsersController {
             String fullname = registerForm.getFullname();
             String passwordHash = bCryptPasswordEncoder.encode(registerForm.getPassword() );
 
+            // ROLE_USER - ROLE_ADMIN
             Role role = roleRepository.findByName("ROLE_USER");
             User user = new User(username, passwordHash, fullname, role);
 

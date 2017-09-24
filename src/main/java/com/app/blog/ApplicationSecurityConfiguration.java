@@ -40,13 +40,13 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests()
-                    .antMatchers("/", "/home", "/user/register").permitAll()
+                    .antMatchers("/" , "/posts", "/user/register", "/posts/view/**").permitAll()
                 .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/user/login")
                     .failureUrl("/user/login?error=true")
-                    .defaultSuccessUrl("/", true)
+                    .defaultSuccessUrl("/posts", true)
                     .permitAll()
                     .and()
                 .logout()
